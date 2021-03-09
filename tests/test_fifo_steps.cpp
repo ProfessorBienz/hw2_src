@@ -29,19 +29,19 @@ TEST(VPNTest, TestsIntests)
     }
 
     count = fifo(head, &remove_frame);
-    ASSERT_EQ(remove_frame->idx, 0);
+    ASSERT_EQ(count, 1);
     tail = remove_frame->next;
     delete remove_frame;
     head = tail;
 
     count = fifo(head, &remove_frame);
-    ASSERT_EQ(remove_frame->idx, 1);
+    ASSERT_EQ(count, 1);
     tail = remove_frame->next;
     delete remove_frame;
     head = tail;
 
     count = fifo(head, &remove_frame);
-    ASSERT_EQ(remove_frame->idx, 2);
+    ASSERT_EQ(count, 1);
     tail = remove_frame->next;
     delete remove_frame;
     head = tail;
@@ -53,8 +53,6 @@ TEST(VPNTest, TestsIntests)
         tail = next;
     }
     count = fifo(head, &remove_frame);
-    ASSERT_EQ(remove_frame->idx, 3);
-
-
+    ASSERT_EQ(count, 1);
 }
 

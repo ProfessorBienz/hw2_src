@@ -21,19 +21,19 @@ TEST(VPNTest, TestsIntests)
     page_size = 4096;
     virtual_address = 65536;
     split_virtual_address(virtual_address, page_size, &vpn, &offset);
-    ASSERT_EQ(vpn, 16);
+    ASSERT_EQ(offset, 0);
 
     virtual_address = 68999;
     split_virtual_address(virtual_address, page_size, &vpn, &offset);
-    ASSERT_EQ(vpn, 16);
+    ASSERT_EQ(offset, 3463);
 
     page_size = 1024;
     virtual_address = 65536;
     split_virtual_address(virtual_address, page_size, &vpn, &offset);
-    ASSERT_EQ(vpn, 64);
+    ASSERT_EQ(offset, 0);
 
     page_size = 1024;
     virtual_address += 3000;
     split_virtual_address(virtual_address, page_size, &vpn, &offset);
-    ASSERT_EQ(vpn, 66);
+    ASSERT_EQ(offset, 952);
 }

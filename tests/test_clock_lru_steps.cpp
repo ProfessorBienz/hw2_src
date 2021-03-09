@@ -16,11 +16,11 @@ int main(int argc, char** argv)
 
 TEST(VPNTest, TestsIntests)
 {
-    FrameList* remove_frame;
     int count;
     int idx = 0;
     FrameList* head = new FrameList(idx++);
     FrameList* tail = head;
+    FrameList* remove_frame;
     for (int i = 0; i < 10; i++)
     {
         FrameList* next = new FrameList(idx++);
@@ -28,33 +28,25 @@ TEST(VPNTest, TestsIntests)
         tail = next;
     }
 
-    count = fifo(head, &remove_frame);
+
+    count = clock_lru(head, &remove_frame);
+    ASSERT_EQ(count, 12);
     ASSERT_EQ(remove_frame->idx, 0);
-    tail = remove_frame->next;
-    delete remove_frame;
-    head = tail;
 
-    count = fifo(head, &remove_frame);
-    ASSERT_EQ(remove_frame->idx, 1);
-    tail = remove_frame->next;
-    delete remove_frame;
-    head = tail;
+    count = clock_lru(head, &remove_frame);
+    ASSERT_EQ(count, 1);
+    ASSERT_EQ(remove_frame->idx, 0);
 
-    count = fifo(head, &remove_frame);
-    ASSERT_EQ(remove_frame->idx, 2);
-    tail = remove_frame->next;
-    delete remove_frame;
-    head = tail;
 
-    for (int i = 3; i < 10; i++)
+    tail = head;
+    for (int i = 0; i < 5; i++)
     {
-        FrameList* next = new FrameList(idx++);
-        tail->next = next;
-        tail = next;
+        tail->access(idx++);
+        tail = tail->next;
     }
-    count = fifo(head, &remove_frame);
-    ASSERT_EQ(remove_frame->idx, 3);
-
+    count = clock_lru(head, &remove_frame);
+    ASSERT_EQ(count, 6);
+    ASSERT_EQ(remove_frame->idx, 5);
 
 }
 

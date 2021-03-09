@@ -28,9 +28,9 @@ TEST(VPNTest, TestsIntests)
         tail = next;
     }
     count = lru(head, &remove_frame);
-    ASSERT_EQ(count, 11);
     ASSERT_EQ(remove_frame->idx, 0);
-
+    head = remove_frame->next;
+    delete remove_frame;
 
     tail = head;
     for (int i = 0; i < 5; i++)
@@ -39,8 +39,27 @@ TEST(VPNTest, TestsIntests)
         tail = tail->next;
     }
     count = lru(head, &remove_frame);
-    ASSERT_EQ(count, 11);
-    ASSERT_EQ(remove_frame->idx, 5);
+    ASSERT_EQ(remove_frame->idx, 6);
+    tail = head;
+    while (tail->next)
+    {
+        if (tail->next == remove_frame)
+        {
+            tail->next = remove_frame->next;
+            delete remove_frame;
+            break;
+        }
+        tail = tail->next;
+    }
 
+    tail = head;
+    while (tail->next)
+    {
+        if (tail->idx != 8)
+            tail->access(idx++);
+        tail = tail->next;
+    }
+    count = lru(head, &remove_frame);
+    ASSERT_EQ(remove_frame->idx, 8);
 }
 

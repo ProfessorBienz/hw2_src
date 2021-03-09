@@ -22,7 +22,7 @@ TEST(TLBTest, TestsIntests)
     tlb->add_entry(0, 16, 256);
     tlb->add_entry(1, 16, 312);
     tlb->add_entry(2, 16, 1024);
-    tlb->add_entry(3, 16, 0, 1);
+    tlb->add_entry(3, 16, 0);
 
     PFN = TLB_lookup(tlb, 64);
     ASSERT_EQ(PFN, 256);
@@ -33,42 +33,8 @@ TEST(TLBTest, TestsIntests)
     PFN = TLB_lookup(tlb, 66);
     ASSERT_EQ(PFN, 1024);
 
-    try
-    {
-        exception = false;
-        TLB_lookup(tlb, 67);
-    }
-    catch (const char* msg)
-    {
-        ASSERT_STREQ(msg, "Protection Fault!");
-        exception = true;
-    }
-    ASSERT_EQ(exception, true);
-
-    try
-    {
-        exception = false;
-        TLB_lookup(tlb, 68);
-    }
-    catch (const char* msg)
-    {
-        ASSERT_STREQ(msg, "TLB Miss!");
-        exception = true;
-    }
-    ASSERT_EQ(exception, true);
-
-    tlb->add_entry(0, 17, 120, 1);
-    try
-    {
-        exception = false;
-        TLB_lookup(tlb, 68);
-    }
-    catch (const char* msg)
-    {
-        ASSERT_STREQ(msg, "Protection Fault!");
-        exception = true;
-    }
-    ASSERT_EQ(exception, true);
+    PFN = TLB_lookup(tlb, 67);
+    ASSERT_EQ(PFN, 0);
 
     delete tlb; 
 }
