@@ -80,9 +80,30 @@ target_link_libraries(test_addr hw2 googletest )
 add_test(TestPhysicalAddress ./test_addr)
 
 
-add_executable(test_virtual_to_physical test_virtual_to_physical.cpp)
-target_link_libraries(test_virtual_to_physical hw2 googletest )
-add_test(TestVirtualToPhysical ./test_virtual_to_physical)
+
+
+
+add_executable(test_virtual_to_physical1 test_virtual_to_physical1.cpp)
+target_link_libraries(test_virtual_to_physical1 hw2 googletest )
+add_test(TestVirtualToPhysical1 ./test_virtual_to_physical1)
+
+add_executable(test_virtual_to_physical2 test_virtual_to_physical2.cpp)
+target_link_libraries(test_virtual_to_physical2 hw2 googletest )
+add_test(TestVirtualToPhysical2 ./test_virtual_to_physical2)
+
+add_executable(test_virtual_to_physical3 test_virtual_to_physical3.cpp)
+target_link_libraries(test_virtual_to_physical3 hw2 googletest )
+add_test(TestVirtualToPhysical3 ./test_virtual_to_physical3)
+
+add_executable(test_virtual_to_physical4 test_virtual_to_physical4.cpp)
+target_link_libraries(test_virtual_to_physical4 hw2 googletest )
+add_test(TestVirtualToPhysical4 ./test_virtual_to_physical4)
+
+add_executable(test_virtual_to_physical5 test_virtual_to_physical5.cpp)
+target_link_libraries(test_virtual_to_physical5 hw2 googletest )
+add_test(TestVirtualToPhysical5 ./test_virtual_to_physical5)
+
+
 
 
 

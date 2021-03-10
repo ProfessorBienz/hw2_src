@@ -17,7 +17,6 @@ int main(int argc, char** argv)
 TEST(PageTableTest, TestsIntests)
 {
     int PFN;
-    bool exception;
     PageTable* table = new PageTable(16);
     TLB* tlb = new TLB(4,2);
     table->add_page(4, 16, 0, 1);

@@ -17,7 +17,6 @@ int main(int argc, char** argv)
 TEST(TLBTest, TestsIntests)
 {
     int PFN;
-    bool exception;
     TLB* tlb = new TLB(4,4);
     tlb->add_entry(0, 16, 256);
     tlb->add_entry(1, 16, 312);
