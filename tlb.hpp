@@ -96,7 +96,7 @@ class TLB_set
         {
             for (int i = 0; i < set_size; i++)
             {
-                if (entries[i]->tag == tag)
+                if (entries[i]->tag == tag && entries[i]->valid_bit==1)
                 {
                     *entry = entries[i];
                     return true;
